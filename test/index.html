@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>InSales autocomplete adress</title>
+    <script src="InsalesAutocompleteAdress.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="InsalesAutocompleteAdress.css">
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="insales-autocomplete-adress">
+        <input
+          type="text"
+          class="insales-autocomplete-adress-input"
+          placeholder="Введите адрес"
+          value="г Москва"
+        >
+        <ul class="insales-autocomplete-adress-result-list"></ul>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      new InsalesAutocompleteAdress('.insales-autocomplete-adress', {
+        debounceTime: 0,
+        autoLocation: true,
+        onChange: (data)=>{
+          console.log('onChange', data);
+        }
+      });
+    </script>
+
+    <style media="screen">
+      body {
+        font-size: 16px;
+      }
+      .container {
+        max-width: 400px;
+        padding: 2rem 0;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      input[type="text"] {
+        padding: 1rem;
+        font-size: 16px;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+    </style>
+  </body>
+</html>

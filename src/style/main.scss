@@ -1,0 +1,43 @@
+.insales-autocomplete-adress {
+  position: relative;
+  --gutter-insales_widget: var(--layout-padding, 1rem);
+  --radius-insales_widget: var(--border-radius-theme, 0rem);
+  --text-color-insales_widget: var(--color-text, inherit);
+  --background-color-insales_widget: var(--color-background, #ffffff);
+  --background-color-graduation-insales_widget: var(--soft-color-background, #f7f7f7);
+  --border-color-insales_widget: var(--color-border, #eeeeee);
+  z-index: 100;
+}
+
+.insales-autocomplete-adress-input {
+  width: 100%;
+}
+
+.insales-autocomplete-adress-result-list {
+  display: block;
+  list-style: none;
+  padding: 0;
+  position: absolute;
+  top: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+  width: 100%;
+  margin: 0;
+  background: var(--background-color-insales_widget);
+  border: 1px solid var(--border-color-insales_widget);
+  box-shadow: 0px 4px 14px -4px var(--border-color-insales_widget);
+}
+
+.insales-autocomplete-adress-result {
+  display: block;
+  padding: 0.75rem 1rem;
+  font-weight: normal;
+  font-size: var(--font-size-insales_widget, 1em);
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--border-color-insales_widget);
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: var(--background-color-graduation-insales_widget);
+  }
+}
