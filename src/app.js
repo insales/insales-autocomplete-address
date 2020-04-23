@@ -51,6 +51,16 @@ class InsalesAutocompleteAdress {
       let options = this.options;
       let $input = selector.querySelector('.insales-autocomplete-adress-input');
 
+      if ($input) {        
+        $input.onkeydown = function (evt) {
+          if (evt.which === 13) {
+            evt.preventDefault();
+            evt.stopPropagation();
+            return false;
+          }
+        };
+      }
+
       selector.classList.add('insales-autocomplete-adress');
 
       this.AutocompleteInstance = new Autocomplete(selector, {
