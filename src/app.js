@@ -95,7 +95,7 @@ class InsalesAutocompleteAdress {
           </li>
         `,
         onSubmit: result => {
-          if (!result.isError) {
+          if (result && !result.isError) {
             locationUtil.setLocation(this.storageKey, result, $input);
           }
         }
