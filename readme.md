@@ -1,4 +1,4 @@
-# InSales - autocomplete adress
+# InSales - autocomplete address
 
 ## Usage
 
