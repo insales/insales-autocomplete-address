@@ -1,6 +1,6 @@
 {
-  "name": "insales-autocomplete-adress",
-  "version": "0.2.0",
+  "name": "insales-autocomplete-address",
+  "version": "0.3.0",
   "description": "",
   "main": "src/index.js",
   "scripts": {
@@ -9,9 +9,9 @@
     "dev": "webpack --watch --development"
   },
   "bugs": {
-    "url": "https://github.com/insales/insales-autocomplete-adress/issues"
+    "url": "https://github.com/insales/insales-autocomplete-address/issues"
   },
-  "homepage": "https://github.com/insales/insales-autocomplete-adress",
+  "homepage": "https://github.com/insales/insales-autocomplete-address",
   "author": "InSales",
   "license": "MIT",
   "devDependencies": {
