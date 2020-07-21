@@ -48,6 +48,11 @@ class InsalesAutocompleteAddress {
     });
   }
 
+  setCountry(country) {
+    this.options.country = country;
+    searchAction(this.searchQuery, this.options.country)
+  }
+
   createAutocomplete(selector) {
       let options = this.options;
       let $input = selector.querySelector('.insales-autocomplete-address-input');
