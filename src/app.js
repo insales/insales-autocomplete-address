@@ -4,7 +4,7 @@ import locationUtil from './modules/location.js';
 import highlightResult from './modules/highlightResult.js';
 
 
-class InsalesAutocompleteAdress {
+class InsalesAutocompleteAddress {
   constructor(selector, {
       onChange = () => {},
       autoLocation = true,
@@ -13,7 +13,7 @@ class InsalesAutocompleteAdress {
     }) {
     this.options = {onChange, debounceTime, autoLocation, country};
     this.items = document.querySelectorAll(selector);
-    this.storageKey = 'InsalesAutocompleteAdress';
+    this.storageKey = 'InsalesAutocompleteAddress';
     this.currentLocation = '';
     this.searchQuery = '';
     this.AutocompleteInstance = null;
@@ -32,7 +32,7 @@ class InsalesAutocompleteAdress {
       });
     })
 
-    document.addEventListener('update:lacation:insales:autocomplete:adress', (event) => {
+    document.addEventListener('update:lacation:insales:autocomplete:address', (event) => {
       this.setValue(event.detail.data);
       this.options.onChange(event.detail.data);
       this.currentLocation = event.detail.data.result;
@@ -41,7 +41,7 @@ class InsalesAutocompleteAdress {
 
   setValue(data) {
     this.items.forEach(el => {
-      let $input = el.querySelector('.insales-autocomplete-adress-input');
+      let $input = el.querySelector('.insales-autocomplete-address-input');
       if (data.result && $input && $input.value !== data.result) {
         $input.value = data.result;
       }
@@ -50,7 +50,7 @@ class InsalesAutocompleteAdress {
 
   createAutocomplete(selector) {
       let options = this.options;
-      let $input = selector.querySelector('.insales-autocomplete-adress-input');
+      let $input = selector.querySelector('.insales-autocomplete-address-input');
 
       if ($input) {
         $input.onkeydown = function (evt) {
@@ -62,7 +62,7 @@ class InsalesAutocompleteAdress {
         };
       }
 
-      selector.classList.add('insales-autocomplete-adress');
+      selector.classList.add('insales-autocomplete-address');
 
       this.AutocompleteInstance = new Autocomplete(selector, {
         search: input => {
@@ -94,13 +94,13 @@ class InsalesAutocompleteAdress {
           })
         },
 
-        baseClass: 'insales-autocomplete-adress',
+        baseClass: 'insales-autocomplete-address',
         autoSelect: true,
         debounceTime: options.debounceTime,
         getResultValue: result => (!result.isError) ? result.result : this.currentLocation,
         renderResult: (result, props) => `
           <li ${props}>
-            <div class="insales-autocomplete-adress-title">
+            <div class="insales-autocomplete-address-title">
               ${highlightResult(result.result, this.searchQuery)}
             </div>
           </li>
@@ -114,4 +114,4 @@ class InsalesAutocompleteAdress {
   }
 }
 
-export default InsalesAutocompleteAdress;
+export default InsalesAutocompleteAddress;

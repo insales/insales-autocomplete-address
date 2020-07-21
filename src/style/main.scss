@@ -1,4 +1,4 @@
-.insales-autocomplete-adress {
+.insales-autocomplete-address {
   position: relative;
   --gutter-insales_widget: var(--layout-padding, 1rem);
   --radius-insales_widget: var(--border-radius-theme, 0rem);
@@ -9,11 +9,11 @@
   z-index: 100;
 }
 
-.insales-autocomplete-adress-input {
+.insales-autocomplete-address-input {
   width: 100%;
 }
 
-.insales-autocomplete-adress-result-list {
+.insales-autocomplete-address-result-list {
   display: block;
   list-style: none;
   padding: 0;
@@ -27,7 +27,7 @@
   box-shadow: 0px 4px 14px -4px var(--border-color-insales_widget);
 }
 
-.insales-autocomplete-adress-result {
+.insales-autocomplete-address-result {
   display: block;
   padding: 0.75rem 1rem;
   font-weight: normal;

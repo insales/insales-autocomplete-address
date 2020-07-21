@@ -3,19 +3,19 @@
 ## Usage
 
 ```
-<div class="insales-autocomplete-adress">
+<div class="insales-autocomplete-address">
   <input
     type="text"
-    class="insales-autocomplete-adress-input"
+    class="insales-autocomplete-address-input"
     placeholder="Введите адрес"
     value=""
   >
-  <ul class="insales-autocomplete-adress-result-list"></ul>
+  <ul class="insales-autocomplete-address-result-list"></ul>
 </div>
 
 
 <script type="text/javascript">
-  new InsalesAutocompleteAdress('.insales-autocomplete-adress', {
+  new InsalesAutocompleteAddress('.insales-autocomplete-address', {
     autoLocation: true,
     debounceTime: 0,
     onChange: (data)=>{

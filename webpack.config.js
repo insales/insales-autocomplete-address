@@ -43,7 +43,7 @@ module.exports = (env, argv) => {
         port: 3000,
         server: ["test", "dist"]
       }),
-      new webpack.BannerPlugin(`InsalesAutocompleteAdress v${pkg.version}\nhttps://github.com/insales/insales-autocomplete-adress/`)
+      new webpack.BannerPlugin(`InsalesAutocompleteAddress v${pkg.version}\nhttps://github.com/insales/insales-autocomplete-address/`)
     ]
   }
 };

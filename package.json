@@ -1,6 +1,6 @@
 {
   "name": "insales-autocomplete-address",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "",
   "main": "src/index.js",
   "scripts": {

@@ -21,7 +21,7 @@ let getLocation = (key, autoLocation) => {
 }
 
 let setLocation = (key, data, target) => {
-  setEventUpdate('update:lacation:insales:autocomplete:adress', data)
+  setEventUpdate('update:lacation:insales:autocomplete:address', data)
   return new Promise((resolve, reject) => {
     if (!localStorage) {
       resolve();
