@@ -1,5 +1,5 @@
 /*!
- * InsalesAutocompleteAddress v0.3.1
+ * InsalesAutocompleteAddress v0.3.2
  * https://github.com/insales/insales-autocomplete-address/
  */
 .insales-autocomplete-address{position:relative;--gutter-insales_widget:var(--layout-padding,1rem);--radius-insales_widget:var(--border-radius-theme,0rem);--text-color-insales_widget:var(--color-text,inherit);--background-color-insales_widget:var(--color-background,#fff);--background-color-graduation-insales_widget:var(--soft-color-background,#f7f7f7);--border-color-insales_widget:var(--color-border,#eee);z-index:100}.insales-autocomplete-address-input{width:100%}.insales-autocomplete-address-result-list{display:block;list-style:none;padding:0;position:absolute;max-height:300px;overflow-y:auto;width:100%;margin:0;background:var(--background-color-insales_widget);border:1px solid var(--border-color-insales_widget);box-shadow:0 4px 14px -4px var(--border-color-insales_widget)}.insales-autocomplete-address-result{display:block;padding:.75rem 1rem;font-weight:400;font-size:var(--font-size-insales_widget,1em)}.insales-autocomplete-address-result:not(:last-child){border-bottom:1px solid var(--border-color-insales_widget)}.insales-autocomplete-address-result:hover{cursor:pointer;background-color:var(--background-color-graduation-insales_widget)}
