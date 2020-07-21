@@ -1,6 +1,6 @@
 {
   "name": "insales-autocomplete-adress",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "description": "",
   "main": "src/index.js",
   "scripts": {
@@ -15,22 +15,22 @@
   "author": "InSales",
   "license": "MIT",
   "devDependencies": {
-    "autoprefixer": "9.7.4",
-    "browser-sync": "2.26.7",
+    "autoprefixer": "9.8.5",
+    "browser-sync": "2.26.10",
     "browser-sync-webpack-plugin": "2.2.2",
-    "browserslist": "4.7.0",
-    "css-loader": "3.4.2",
+    "browserslist": "4.13.0",
+    "css-loader": "3.6.0",
     "cssnano": "4.1.10",
     "mini-css-extract-plugin": "^0.9.0",
-    "node-sass": "4.13.0",
-    "postcss": "7.0.26",
+    "node-sass": "4.14.1",
+    "postcss": "7.0.32",
     "postcss-loader": "3.0.0",
-    "sass-loader": "8.0.2",
-    "style-loader": "1.1.2",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
+    "sass-loader": "9.0.2",
+    "style-loader": "1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "@trevoreyre/autocomplete-js": "^2.1.1"
+    "@trevoreyre/autocomplete-js": "^2.2.0"
   }
 }
