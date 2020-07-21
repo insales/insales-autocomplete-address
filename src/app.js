@@ -8,9 +8,10 @@ class InsalesAutocompleteAdress {
   constructor(selector, {
       onChange = () => {},
       autoLocation = true,
+      country = 'RU',
       debounceTime = 0
     }) {
-    this.options = {onChange, debounceTime, autoLocation};
+    this.options = {onChange, debounceTime, autoLocation, country};
     this.items = document.querySelectorAll(selector);
     this.storageKey = 'InsalesAutocompleteAdress';
     this.currentLocation = '';
@@ -51,7 +52,7 @@ class InsalesAutocompleteAdress {
       let options = this.options;
       let $input = selector.querySelector('.insales-autocomplete-adress-input');
 
-      if ($input) {        
+      if ($input) {
         $input.onkeydown = function (evt) {
           if (evt.which === 13) {
             evt.preventDefault();
@@ -67,7 +68,7 @@ class InsalesAutocompleteAdress {
         search: input => {
           this.searchQuery = input;
           return new Promise((resolve, reject) => {
-            searchAction(input)
+            searchAction(input, options.country)
               .then((data) => {
                 if (data.length == 0 && input.length > 5) {
                   resolve([

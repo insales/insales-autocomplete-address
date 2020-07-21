@@ -1,8 +1,8 @@
 import fetchJSONP from './fetchJSONP.js';
 
-export default input => {
+export default (input, country) => {
   const kladrUrl = 'https://kladr.insales.ru'
-  const url = `${kladrUrl}/fulltext_search.json?q=${input}&with_parent=1`
+  const url = `${kladrUrl}/fulltext_search.json?q=${input}&country=${country}&with_parent=1`
 
   return new Promise(resolve => {
     if (input.length < 2) {
