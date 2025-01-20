@@ -42,7 +42,7 @@ class InsalesAutocompleteAddress {
 
   setValue(data) {
     this.items.forEach(el => {
-      const $input = el.querySelector('.insales-autocomplete-adress-input');
+      const $input = el.querySelector('.insales-autocomplete-address-input');
       if (data.result && $input && $input.value !== data.result) {
         $input.value = data.result;
         $input.setAttribute('value', data.result);
@@ -56,7 +56,7 @@ class InsalesAutocompleteAddress {
 
   createAutocomplete(selector) {
     const options = this.options;
-    const $input = selector.querySelector('.insales-autocomplete-adress-input');
+    const $input = selector.querySelector('.insales-autocomplete-address-input');
 
     if ($input) {
       $input.onkeydown = (evt) => {
@@ -68,11 +68,11 @@ class InsalesAutocompleteAddress {
       };
     }
 
-    selector.classList.add('insales-autocomplete-adress');
+    selector.classList.add('insales-autocomplete-address');
 
     this.AutocompleteInstance = new Autocomplete(selector, {
       search: this.handleSearch.bind(this),
-      baseClass: 'insales-autocomplete-adress',
+      baseClass: 'insales-autocomplete-address',
       autoSelect: true,
       debounceTime: options.debounceTime,
       getResultValue: this.getResultValue.bind(this),
@@ -107,7 +107,7 @@ class InsalesAutocompleteAddress {
   renderResult(result, props) {
     return `
       <li ${props}>
-        <div class="insales-autocomplete-adress-title">
+        <div class="insales-autocomplete-address-title">
           ${highlightResult(result.result, this.searchQuery)}
         </div>
       </li>
