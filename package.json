@@ -1,12 +1,12 @@
 {
   "name": "insales-autocomplete-address",
-  "version": "0.3.5",
+  "version": "0.4.0",
   "description": "",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "dev": "webpack --watch --development"
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development --watch"
   },
   "bugs": {
     "url": "https://github.com/insales/insales-autocomplete-address/issues"
@@ -15,22 +15,22 @@
   "author": "InSales",
   "license": "MIT",
   "devDependencies": {
-    "autoprefixer": "9.8.5",
-    "browser-sync": "2.26.10",
-    "browser-sync-webpack-plugin": "2.2.2",
-    "browserslist": "4.13.0",
-    "css-loader": "3.6.0",
-    "cssnano": "4.1.10",
-    "mini-css-extract-plugin": "^0.9.0",
-    "node-sass": "4.14.1",
-    "postcss": "7.0.32",
-    "postcss-loader": "3.0.0",
-    "sass-loader": "9.0.2",
-    "style-loader": "1.2.1",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12"
+    "autoprefixer": "10.4.20",
+    "browser-sync": "3.0.3",
+    "browser-sync-v3-webpack-plugin": "0.1.0",
+    "browserslist": "4.24.4",
+    "css-loader": "7.1.2",
+    "cssnano": "7.0.6",
+    "mini-css-extract-plugin": "^2.9.1",
+    "sass": "^1.83.4",
+    "postcss": "8.5.1",
+    "postcss-loader": "8.1.1",
+    "sass-loader": "16.0.4",
+    "style-loader": "4.0.0",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1"
   },
   "dependencies": {
-    "@trevoreyre/autocomplete-js": "^2.2.0"
+    "@trevoreyre/autocomplete-js": "^2.4.1"
   }
 }

@@ -1,3 +1,5 @@
-const InsalesAutocompleteAddress = require('./app').default;
-require('./style/main.scss');
-module.exports = InsalesAutocompleteAddress;
+import InsalesAutocompleteAddress from './app.js';
+import './style/main.scss';
+
+
+export default InsalesAutocompleteAddress;
