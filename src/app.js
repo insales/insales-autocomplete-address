@@ -8,10 +8,11 @@ class InsalesAutocompleteAddress {
   constructor(selector, {
       onChange = () => {},
       autoLocation = true,
+      initialFulltextSearch = null,
       country = 'RU',
       debounceTime = 0
     }) {
-    this.options = {onChange, debounceTime, autoLocation, country};
+    this.options = {onChange, debounceTime, autoLocation, country, initialFulltextSearch};
     this.items = document.querySelectorAll(selector);
     this.storageKey = 'InsalesAutocompleteAddress';
     this.currentLocation = '';
@@ -23,7 +24,7 @@ class InsalesAutocompleteAddress {
       return;
     }
 
-    locationUtil.getLocation(this.storageKey, this.options.autoLocation).then((data) => {
+    locationUtil.getLocation(this.storageKey, this.options).then((data) => {
       this.items.forEach(el => {
         this.createAutocomplete(el)
         if (data) {
@@ -32,7 +33,7 @@ class InsalesAutocompleteAddress {
       });
     })
 
-    document.addEventListener('update:lacation:insales:autocomplete:address', (event) => {
+    document.addEventListener('update:location:insales:autocomplete:address', (event) => {
       this.setValue(event.detail.data);
       this.options.onChange(event.detail.data);
       this.currentLocation = event.detail.data.result;
@@ -41,81 +42,82 @@ class InsalesAutocompleteAddress {
 
   setValue(data) {
     this.items.forEach(el => {
-      let $input = el.querySelector('.insales-autocomplete-address-input');
+      const $input = el.querySelector('.insales-autocomplete-adress-input');
       if (data.result && $input && $input.value !== data.result) {
         $input.value = data.result;
+        $input.setAttribute('value', data.result);
       }
     });
   }
 
   setCountry(country) {
     this.options.country = country;
-    searchAction(this.searchQuery, this.options.country)
   }
 
   createAutocomplete(selector) {
-      let options = this.options;
-      let $input = selector.querySelector('.insales-autocomplete-address-input');
+    const options = this.options;
+    const $input = selector.querySelector('.insales-autocomplete-adress-input');
 
-      if ($input) {
-        $input.onkeydown = function (evt) {
-          if (evt.which === 13) {
-            evt.preventDefault();
-            evt.stopPropagation();
-            return false;
-          }
-        };
-      }
-
-      selector.classList.add('insales-autocomplete-address');
-
-      this.AutocompleteInstance = new Autocomplete(selector, {
-        search: input => {
-          this.searchQuery = input;
-          return new Promise((resolve, reject) => {
-            searchAction(input, options.country)
-              .then((data) => {
-                if (data.length == 0 && input.length > 5) {
-                  resolve([
-                    {
-                      isError: true,
-                      result: 'Город не найден'
-                    }
-                  ]);
-                }else{
-                  resolve(data);
-                }
-              })
-              .catch((data) => {
-                if (input != '') {
-                  resolve([
-                    {
-                      isError: true,
-                      result: 'Город не найден'
-                    }
-                  ]);
-                }
-              })
-          })
-        },
-
-        baseClass: 'insales-autocomplete-address',
-        autoSelect: true,
-        debounceTime: options.debounceTime,
-        getResultValue: result => (!result.isError) ? result.result : this.currentLocation,
-        renderResult: (result, props) => `
-          <li ${props}>
-            <div class="insales-autocomplete-address-title">
-              ${highlightResult(result.result, this.searchQuery)}
-            </div>
-          </li>
-        `,
-        onSubmit: result => {
-          if (result && !result.isError) {
-            locationUtil.setLocation(this.storageKey, result, $input);
-          }
+    if ($input) {
+      $input.onkeydown = (evt) => {
+        if (evt.key === 'Enter') {
+          evt.preventDefault();
+          evt.stopPropagation();
+          return false;
         }
-      })
+      };
+    }
+
+    selector.classList.add('insales-autocomplete-adress');
+
+    this.AutocompleteInstance = new Autocomplete(selector, {
+      search: this.handleSearch.bind(this),
+      baseClass: 'insales-autocomplete-adress',
+      autoSelect: true,
+      debounceTime: options.debounceTime,
+      getResultValue: this.getResultValue.bind(this),
+      renderResult: this.renderResult.bind(this),
+      onSubmit: this.handleSubmit.bind(this)
+    });
+  }
+
+  handleSearch(input) {
+    this.searchQuery = input;
+    return new Promise((resolve) => {
+      searchAction(input, this.options.country)
+        .then((data) => {
+          if (data.length === 0 && input.length > 5) {
+            resolve([{ isError: true, result: 'Город не найден' }]);
+          } else {
+            resolve(data);
+          }
+        })
+        .catch(() => {
+          if (input !== '') {
+            resolve([{ isError: true, result: 'Город не найден' }]);
+          }
+        });
+    });
+  }
+
+  getResultValue(result) {
+    return (!result.isError) ? result.result : this.currentLocation;
+  }
+
+  renderResult(result, props) {
+    return `
+      <li ${props}>
+        <div class="insales-autocomplete-adress-title">
+          ${highlightResult(result.result, this.searchQuery)}
+        </div>
+      </li>
+    `;
+  }
+
+  handleSubmit(result) {
+    if (result && !result.isError) {
+      locationUtil.setLocation(this.storageKey, result, this.$input);
+    }
   }
 }
 

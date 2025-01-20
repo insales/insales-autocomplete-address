@@ -1,40 +1,54 @@
 import fetchJSONP from './fetchJSONP.js';
+import searchAction from './searchAction.js';
 
-let getLocation = (key, autoLocation) => {
-  return new Promise((resolve, reject) => {
-    if (!localStorage && autoLocation || localStorage && !localStorage[key] && autoLocation) {
-      getKladrLocation().then((data) => {
-        resolve(data);
-      })
-      .catch((err) => {
-        resolve(null);
-      })
-    }else{
+const getLocation = (key, { autoLocation, country, initialFulltextSearch }) => {
+  return new Promise((resolve) => {
+    if (!localStorage || (localStorage && !localStorage[key] && (autoLocation || initialFulltextSearch))) {
+      if (initialFulltextSearch) {
+        searchAction(initialFulltextSearch, country)
+          .then((data) => {
+            if (data.length === 0) {
+              resolve(null)
+            } else {
+              resolve(data[0]);
+            }
+          })
+          .catch(() => {
+            if (input !== '') {
+              resolve(null)
+            }
+          });
+      } else {
+        getKladrLocation()
+          .then(resolve)
+          .catch(() => resolve(null));
+      }
+    } else {
       try {
-        let data = JSON.parse(localStorage[key]);
+        const data = JSON.parse(localStorage[key]);
         resolve(data);
       } catch (err) {
         resolve(null);
       }
     }
-  })
-}
+  });
+};
 
-let setLocation = (key, data, target) => {
-  setEventUpdate('update:lacation:insales:autocomplete:address', data)
+const setLocation = (key, data) => {
+  setEventUpdate('update:location:insales:autocomplete:address', data);
   return new Promise((resolve, reject) => {
     if (!localStorage) {
       resolve();
-    }else{
+    } else {
       try {
-        localStorage[key] = JSON.stringify(data)
+        localStorage[key] = JSON.stringify(data);
         resolve();
       } catch (err) {
         reject(err);
       }
     }
-  })
-}
+  });
+};
 
 let setEventUpdate = (name, data) => {
   var event = new CustomEvent(name, { 'detail': {data} });
