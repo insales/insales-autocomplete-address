@@ -46,6 +46,17 @@ class InsalesAutocompleteAddress {
   }
 
   /**
+   * Инициализирует автокомплиты без установки локации
+   */
+  initWithoutLocation() {
+    this.items.forEach(el => {
+      this.createAutocomplete(el);
+    });
+
+    document.addEventListener('update:location:insales:autocomplete:address', this.boundHandleLocationUpdate);
+  }
+
+  /**
    * Устанавливает значение в поля ввода автокомплита
    * @param {Object} data - Объект с данными о локации
    * @param {string} data.result - Результат поиска для установки в поле ввода
@@ -193,8 +204,10 @@ class InsalesAutocompleteAddress {
   /**
    * Пересоздает все экземпляры автокомплита
    * Полезно для обновления конфигурации или восстановления после destroy
+   * @param {Object} options - Настройки пересоздания
+   * @param {boolean} options.withLocation - Устанавливать ли адрес при пересоздании (по умолчанию false)
    */
-  recreate() {
+  recreate({ withLocation = false } = {}) {
     this.destroy();
     
     this.items = document.querySelectorAll(this.originalSelector);
@@ -205,7 +218,12 @@ class InsalesAutocompleteAddress {
     }
     
     this.boundHandleLocationUpdate = this.handleLocationUpdate.bind(this);
-    this.init();
+    
+    if (withLocation) {
+      this.init();
+    } else {
+      this.initWithoutLocation();
+    }
   }
 }
 
