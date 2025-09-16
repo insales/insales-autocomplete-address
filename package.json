@@ -1,6 +1,6 @@
 {
   "name": "insales-autocomplete-address",
-  "version": "0.4.1",
+  "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
   "scripts": {
@@ -31,6 +31,6 @@
     "webpack-cli": "^6.0.1"
   },
   "dependencies": {
-    "@trevoreyre/autocomplete-js": "^2.4.1"
+    "@trevoreyre/autocomplete-js": "^3.0.3"
   }
 }
