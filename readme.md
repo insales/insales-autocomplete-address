@@ -1,15 +1,15 @@
 # InSales - autocomplete address
 
-[![npm version](https://img.shields.io/npm/v/insales-autocomplete-adress.svg)](https://www.npmjs.com/package/insales-autocomplete-adress)
-[![npm](https://img.shields.io/npm/dm/insales-autocomplete-adress.svg)](https://www.npmjs.com/package/insales-autocomplete-adress)
+[![npm version](https://img.shields.io/npm/v/insales-autocomplete-address.svg)](https://www.npmjs.com/package/insales-autocomplete-address)
+[![npm](https://img.shields.io/npm/dm/insales-autocomplete-address.svg)](https://www.npmjs.com/package/insales-autocomplete-address)
 
 ## Installation
 
 ```bash
-npm install insales-autocomplete-adress
+npm install insales-autocomplete-address
 ```
 
-Пакет на npm: [insales-autocomplete-adress](https://www.npmjs.com/package/insales-autocomplete-adress)
+Пакет на npm: [insales-autocomplete-address](https://www.npmjs.com/package/insales-autocomplete-address)
 
 ## Usage
 
