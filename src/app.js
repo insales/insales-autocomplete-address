@@ -10,9 +10,10 @@ class InsalesAutocompleteAddress {
       autoLocation = true,
       initialFulltextSearch = null,
       country = 'RU',
-      debounceTime = 0
+      debounceTime = 0,
+      clearInputOnCountryChange = false
     }) {
-    this.options = {onChange, debounceTime, autoLocation, country, initialFulltextSearch};
+    this.options = {onChange, debounceTime, autoLocation, country, initialFulltextSearch, clearInputOnCountryChange};
     this.originalSelector = selector;
     this.items = document.querySelectorAll(selector);
     this.storageKey = 'InsalesAutocompleteAddress';
@@ -20,6 +21,8 @@ class InsalesAutocompleteAddress {
     this.searchQuery = '';
     this.AutocompleteInstance = null;
     this.boundHandleLocationUpdate = this.handleLocationUpdate.bind(this);
+    this.previousCountry = country;
+    this.countryChanged = false;
 
     if (!this.items.length) {
       console.warn(`Передан неверный селектор: ${selector}`);
@@ -36,10 +39,14 @@ class InsalesAutocompleteAddress {
     locationUtil.getLocation(this.storageKey, this.options).then((data) => {
       this.items.forEach(el => {
         this.createAutocomplete(el);
-        if (data) {
+        // Если настройка clearInputOnCountryChange включена и страна изменилась,
+        // не устанавливаем локацию из localStorage
+        if (data && !(this.options.clearInputOnCountryChange && this.countryChanged)) {
           locationUtil.setLocation(this.storageKey, data);
         }
       });
+      // Сбрасываем флаг после инициализации
+      this.countryChanged = false;
     });
 
     document.addEventListener('update:location:insales:autocomplete:address', this.boundHandleLocationUpdate);
@@ -64,7 +71,7 @@ class InsalesAutocompleteAddress {
   setValue(data) {
     this.items.forEach(el => {
       const $input = el.querySelector('.insales-autocomplete-address-input');
-      if (data.result && $input && $input.value !== data.result) {
+      if (data && data.result && $input && $input.value !== data.result) {
         $input.value = data.result;
         $input.setAttribute('value', data.result);
       }
@@ -72,11 +79,33 @@ class InsalesAutocompleteAddress {
   }
 
   /**
+   * Очищает поля ввода автокомплита
+   */
+  clearInput() {
+    this.items.forEach(el => {
+      const $input = el.querySelector('.insales-autocomplete-address-input');
+      if ($input) {
+        $input.value = '';
+        $input.setAttribute('value', '');
+      }
+    });
+    this.currentLocation = '';
+    this.searchQuery = '';
+  }
+
+  /**
    * Устанавливает страну для поиска адресов
    * @param {string} country - Код страны (например, 'RU', 'US', 'DE')
    */
   setCountry(country) {
+    const countryChanged = this.options.country !== country;
+    this.previousCountry = this.options.country;
     this.options.country = country;
+    this.countryChanged = countryChanged;
+    
+    if (countryChanged && this.options.clearInputOnCountryChange) {
+      this.clearInput();
+    }
   }
 
   /**
@@ -218,6 +247,12 @@ class InsalesAutocompleteAddress {
     }
     
     this.boundHandleLocationUpdate = this.handleLocationUpdate.bind(this);
+    
+    // Если настройка clearInputOnCountryChange включена и не нужно устанавливать локацию,
+    // очищаем инпут перед инициализацией
+    if (this.options.clearInputOnCountryChange && !withLocation) {
+      this.clearInput();
+    }
     
     if (withLocation) {
       this.init();
