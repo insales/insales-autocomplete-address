@@ -7,13 +7,17 @@ import highlightResult from './modules/highlightResult.js';
 class InsalesAutocompleteAddress {
   constructor(selector, {
       onChange = () => {},
+      onClearInput = () => {},
       autoLocation = true,
       initialFulltextSearch = null,
       country = 'RU',
       debounceTime = 0,
+      countryChanged = false,
       clearInputOnCountryChange = false
     }) {
-    this.options = {onChange, debounceTime, autoLocation, country, initialFulltextSearch, clearInputOnCountryChange};
+    this.options = {
+      onChange, onClearInput, debounceTime, autoLocation, country, initialFulltextSearch, clearInputOnCountryChange
+    };
     this.originalSelector = selector;
     this.items = document.querySelectorAll(selector);
     this.storageKey = 'InsalesAutocompleteAddress';
@@ -22,7 +26,7 @@ class InsalesAutocompleteAddress {
     this.AutocompleteInstance = null;
     this.boundHandleLocationUpdate = this.handleLocationUpdate.bind(this);
     this.previousCountry = country;
-    this.countryChanged = false;
+    this.countryChanged = countryChanged;
 
     if (!this.items.length) {
       console.warn(`Передан неверный селектор: ${selector}`);
@@ -91,6 +95,7 @@ class InsalesAutocompleteAddress {
     });
     this.currentLocation = '';
     this.searchQuery = '';
+    this.options.onClearInput();
   }
 
   /**
